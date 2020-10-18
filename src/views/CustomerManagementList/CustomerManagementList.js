@@ -23,9 +23,9 @@ const CustomerManagementList = () => {
     let mounted = true;
 
     const fetchCustomers = () => {
-      axios.get('/api/management/customers').then(response => {
+      axios.get('http://rinne.top:16384/student/list').then(response => {
         if (mounted) {
-          setCustomers(response.data.customers);
+          setCustomers(response.data);
         }
       });
     };
@@ -37,13 +37,13 @@ const CustomerManagementList = () => {
     };
   }, []);
 
-  const handleFilter = () => {};
-  const handleSearch = () => {};
+  const handleFilter = () => { };
+  const handleSearch = () => { };
 
   return (
     <Page
       className={classes.root}
-      title="Customer Management List"
+      title="学生管理表单"
     >
       <Header />
       <SearchBar

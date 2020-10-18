@@ -36,7 +36,7 @@ const Header = props => {
             component="h1"
             variant="h3"
           >
-            Customers
+            学生表单
           </Typography>
         </Grid>
         <Grid item>
@@ -44,7 +44,7 @@ const Header = props => {
             color="primary"
             variant="contained"
           >
-            Add customer
+            添加新学生
           </Button>
         </Grid>
       </Grid>

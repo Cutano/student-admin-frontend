@@ -63,7 +63,7 @@ const SearchBar = props => {
           size="small"
           variant="outlined"
         >
-          <FilterListIcon className={classes.filterIcon} /> Show filters
+          <FilterListIcon className={classes.filterIcon} /> 打开筛选页面
         </Button>
       </Grid>
       <Filter

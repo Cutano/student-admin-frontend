@@ -98,6 +98,72 @@ const Results = props => {
     setRowsPerPage(event.target.value);
   };
 
+  const tableBody = () => {
+    return (
+      customers.slice(0, rowsPerPage).map(customer => (
+        <TableRow
+          hover
+          key={customer.id}
+          selected={selectedCustomers.indexOf(customer.id) !== -1}
+        >
+          <TableCell padding="checkbox">
+            <Checkbox
+              checked={
+                selectedCustomers.indexOf(customer.id) !== -1
+              }
+              color="primary"
+              onChange={event =>
+                handleSelectOne(event, customer.id)
+              }
+              value={selectedCustomers.indexOf(customer.id) !== -1}
+            />
+          </TableCell>
+          <TableCell>
+            <div className={classes.nameCell}>
+              <Avatar
+                className={classes.avatar}
+                src={customer.avatar}
+              >
+                {getInitials(customer.name)}
+              </Avatar>
+              <div>
+                <Link
+                  color="inherit"
+                  component={RouterLink}
+                  to="/management/customers/1"
+                  variant="h6"
+                >
+                  {customer.name}
+                </Link>
+                <div>{customer.email}</div>
+              </div>
+            </div>
+          </TableCell>
+          <TableCell>{customer.id}</TableCell>
+          <TableCell>
+            {customer.sex}
+          </TableCell>
+          <TableCell>学生</TableCell>
+          <TableCell>已登记</TableCell>
+          <TableCell>
+            <ReviewStars value={customer.rating} />
+          </TableCell>
+          <TableCell align="right">
+            <Button
+              color="primary"
+              component={RouterLink}
+              size="small"
+              to="/management/customers/1"
+              variant="outlined"
+            >
+              View
+            </Button>
+          </TableCell>
+        </TableRow>
+      ))
+    )
+  };
+
   return (
     <div
       {...rest}
@@ -114,7 +180,7 @@ const Results = props => {
       <Card>
         <CardHeader
           action={<GenericMoreButton />}
-          title="All customers"
+          title="全部学生"
         />
         <Divider />
         <CardContent className={classes.content}>
@@ -134,78 +200,17 @@ const Results = props => {
                         onChange={handleSelectAll}
                       />
                     </TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Location</TableCell>
-                    <TableCell>Money spent</TableCell>
-                    <TableCell>Type</TableCell>
-                    <TableCell>Projects held</TableCell>
+                    <TableCell>姓名</TableCell>
+                    <TableCell>学号</TableCell>
+                    <TableCell>性别</TableCell>
+                    <TableCell>身份</TableCell>
+                    <TableCell>登记状态</TableCell>
                     <TableCell>Reviews</TableCell>
                     <TableCell align="right">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {customers.slice(0, rowsPerPage).map(customer => (
-                    <TableRow
-                      hover
-                      key={customer.id}
-                      selected={selectedCustomers.indexOf(customer.id) !== -1}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={
-                            selectedCustomers.indexOf(customer.id) !== -1
-                          }
-                          color="primary"
-                          onChange={event =>
-                            handleSelectOne(event, customer.id)
-                          }
-                          value={selectedCustomers.indexOf(customer.id) !== -1}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <div className={classes.nameCell}>
-                          <Avatar
-                            className={classes.avatar}
-                            src={customer.avatar}
-                          >
-                            {getInitials(customer.name)}
-                          </Avatar>
-                          <div>
-                            <Link
-                              color="inherit"
-                              component={RouterLink}
-                              to="/management/customers/1"
-                              variant="h6"
-                            >
-                              {customer.name}
-                            </Link>
-                            <div>{customer.email}</div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>{customer.location}</TableCell>
-                      <TableCell>
-                        {customer.currency}
-                        {customer.spent}
-                      </TableCell>
-                      <TableCell>{customer.type}</TableCell>
-                      <TableCell>{customer.projects}</TableCell>
-                      <TableCell>
-                        <ReviewStars value={customer.rating} />
-                      </TableCell>
-                      <TableCell align="right">
-                        <Button
-                          color="primary"
-                          component={RouterLink}
-                          size="small"
-                          to="/management/customers/1"
-                          variant="outlined"
-                        >
-                          View
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {tableBody()}
                 </TableBody>
               </Table>
             </div>

@@ -3,6 +3,24 @@ import moment from 'moment';
 
 import mock from 'utils/mock';
 
+// mock.onGet('http://rinne.top:16384/student/list').reply(200, [
+//   {
+//     'id': 10001,
+//     'name': '张三',
+//     'sex': '男'
+//   },
+//   {
+//     'id': 10002,
+//     'name': '李四',
+//     'sex': '女'
+//   },
+//   {
+//     'id': 10003,
+//     'name': '王五',
+//     'sex': '男'
+//   }
+// ]);
+
 mock.onGet('/api/management/customers').reply(200, {
   customers: [
     {
