@@ -25,6 +25,7 @@ import {
 
 import getInitials from 'utils/getInitials';
 import { ReviewStars, GenericMoreButton, TableEditBar } from 'components';
+import axios from '../../../../utils/axios';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Results = props => {
-  const { className, customers, ...rest } = props;
+  const { className, customers, onCustomersChange, ...rest } = props;
 
   const classes = useStyles();
 
@@ -96,6 +97,15 @@ const Results = props => {
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(event.target.value);
+  };
+
+  const handleDelete = () => {
+    for (const selected of selectedCustomers) {
+      axios.get('http://rinne.top:16384/student/del?id=' + selected).then(requset => {
+        onCustomersChange();
+      });
+    }
+    setSelectedCustomers([]);
   };
 
   const tableBody = () => {
@@ -228,14 +238,18 @@ const Results = props => {
           />
         </CardActions>
       </Card>
-      <TableEditBar selected={selectedCustomers} />
+      <TableEditBar
+        onDelete={handleDelete}
+        selected={selectedCustomers}
+      />
     </div>
   );
 };
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  customers: PropTypes.array.isRequired,
+  onCustomersChange: PropTypes.func
 };
 
 Results.defaultProps = {

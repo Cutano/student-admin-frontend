@@ -39,6 +39,11 @@ const CustomerManagementList = () => {
 
   const handleFilter = () => { };
   const handleSearch = () => { };
+  const handleOnCustomersChange = () => {
+    axios.get('http://rinne.top:16384/student/list').then(response => {
+      setCustomers(response.data);
+    });
+  };
 
   return (
     <Page
@@ -54,6 +59,7 @@ const CustomerManagementList = () => {
         <Results
           className={classes.results}
           customers={customers}
+          onCustomersChange={handleOnCustomersChange}
         />
       )}
     </Page>
