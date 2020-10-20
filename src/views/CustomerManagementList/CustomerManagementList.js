@@ -50,7 +50,7 @@ const CustomerManagementList = () => {
       className={classes.root}
       title="学生管理表单"
     >
-      <Header />
+      <Header onCustomersChange={handleOnCustomersChange}/>
       <SearchBar
         onFilter={handleFilter}
         onSearch={handleSearch}

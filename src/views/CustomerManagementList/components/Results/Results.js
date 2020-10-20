@@ -101,7 +101,7 @@ const Results = props => {
 
   const handleDelete = () => {
     for (const selected of selectedCustomers) {
-      axios.get('http://rinne.top:16384/student/del?id=' + selected).then(requset => {
+      axios.get('http://rinne.top:16384/student/del?id=' + selected).then(() => {
         onCustomersChange();
       });
     }
