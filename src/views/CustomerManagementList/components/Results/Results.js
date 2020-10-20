@@ -110,7 +110,7 @@ const Results = props => {
 
   const tableBody = () => {
     return (
-      customers.slice(0, rowsPerPage).map(customer => (
+      customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(customer => (
         <TableRow
           hover
           key={customer.id}
