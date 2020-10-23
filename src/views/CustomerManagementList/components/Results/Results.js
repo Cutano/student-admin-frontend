@@ -26,6 +26,7 @@ import {
 import getInitials from 'utils/getInitials';
 import { ReviewStars, GenericMoreButton, TableEditBar } from 'components';
 import axios from '../../../../utils/axios';
+import EditStudentDialog from '../EditStudentDialog/EditStudentDialog';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -58,6 +59,7 @@ const Results = props => {
   const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const handleSelectAll = event => {
     const selectedCustomers = event.target.checked
@@ -106,6 +108,21 @@ const Results = props => {
       });
     }
     setSelectedCustomers([]);
+  };
+
+  const handleEdit = () => {
+    setDialogOpen(true);
+  }
+
+  const handleEditClose = (name, sex) => {
+    if (name !== '' && sex !== '') {
+      for (const selected of selectedCustomers) {
+        axios.get('http://rinne.top:16384/student/update?id=' + selected + '&name=' + name + '&sex=' + sex).then(() => {
+          onCustomersChange();
+        });
+      }
+    }
+    setDialogOpen(false);
   };
 
   const tableBody = () => {
@@ -240,7 +257,12 @@ const Results = props => {
       </Card>
       <TableEditBar
         onDelete={handleDelete}
+        onMarkUnpaid={handleEdit}
         selected={selectedCustomers}
+      />
+      <EditStudentDialog
+        onClose={handleEditClose}
+        open={dialogOpen}
       />
     </div>
   );

@@ -27,6 +27,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import InfoIcon from '@material-ui/icons/Info';
 
 import axios from 'utils/axios';
 import useRouter from 'utils/useRouter';
@@ -88,6 +89,14 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1)
   },
   logoutIcon: {
+    marginRight: theme.spacing(1)
+  },
+  title: {
+    margin: theme.spacing(1),
+    color: 'white',
+    fontSize: '18px'
+  },
+  icon: {
     marginRight: theme.spacing(1)
   }
 }));
@@ -177,10 +186,10 @@ const TopBar = props => {
     >
       <Toolbar>
         <RouterLink to="/">
-          <img
-            alt="Logo"
-            src="/images/logos/logo--white.svg"
-          />
+          <Button className={classes.title}>
+            <InfoIcon className={classes.icon}/>
+            学生管理系统
+          </Button>
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden smDown>

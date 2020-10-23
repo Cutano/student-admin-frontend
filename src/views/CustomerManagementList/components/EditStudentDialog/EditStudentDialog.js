@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AddStudentDialog(props) {
+export default function EditStudentDialog(props) {
   const { onClose, open } = props;
   const [name, setName] = React.useState('');
   const [sex, setSex] = React.useState('');
@@ -69,7 +69,7 @@ export default function AddStudentDialog(props) {
       onClose={handleClose}
       open={open}
     >
-      <DialogTitle id="form-dialog-title">添加新学生</DialogTitle>
+      <DialogTitle id="form-dialog-title">编辑学生信息</DialogTitle>
       <DialogContent>
         <DialogContentText>
           请在下方输入学生信息
@@ -91,18 +91,24 @@ export default function AddStudentDialog(props) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel} color="primary">
+        <Button
+          color="primary"
+          onClick={handleCancel}
+        >
           取消
         </Button>
-        <Button onClick={handleClose} color="primary">
-          添加
+        <Button
+          color="primary"
+          onClick={handleClose}
+        >
+          确定
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-AddStudentDialog.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func
+EditStudentDialog.propTypes = {
+  onClose: PropTypes.func,
+  open: PropTypes.bool
 };

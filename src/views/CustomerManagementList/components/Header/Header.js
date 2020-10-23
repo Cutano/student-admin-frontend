@@ -22,7 +22,7 @@ const Header = props => {
 
   const handleDialogClose = (name, sex) => {
     if (name !== '' && sex !== '') {
-      axios.get('http://rinne.top:16384/student/add?name=' + name + '&sex=' + sex).then(response => {
+      axios.get('http://rinne.top:16384/student/add?name=' + name + '&sex=' + sex).then(() => {
         onCustomersChange();
       });
     }
@@ -66,8 +66,8 @@ const Header = props => {
         </Grid>
       </Grid>
       <AddStudentDialog
-        open={dialogOpen}
         onClose={handleDialogClose}
+        open={dialogOpen}
       />
     </div>
   );

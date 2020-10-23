@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Drawer, Grid, Typography, Button, Hidden } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   },
   buttonIcon: {
     marginRight: theme.spacing(1)
+  },
+  deleteButton: {
+    color: theme.palette.error.main
   }
 }));
 
@@ -73,17 +76,13 @@ const TableEditBar = props => {
             xs={12}
           >
             <div className={classes.actions}>
-              <Button onClick={onMarkPaid}>
-                <CheckIcon className={classes.buttonIcon} />
-                Mark Paid
-              </Button>
               <Button onClick={onMarkUnpaid}>
-                <CloseIcon className={classes.buttonIcon} />
-                Mark Unpaid
+                <EditIcon className={classes.buttonIcon} />
+                编辑
               </Button>
-              <Button onClick={onDelete}>
+              <Button className={classes.deleteButton} onClick={onDelete}>
                 <DeleteIcon className={classes.buttonIcon} />
-                Delete
+                删除
               </Button>
             </div>
           </Grid>
