@@ -52,8 +52,12 @@ export default [
         icon: BarChartIcon,
         children: [
           {
-            title: 'Customers',
+            title: '学生管理',
             href: '/management/customers'
+          },
+          {
+            title: '教师管理',
+            href: '/management/teachers'
           },
           {
             title: 'Customer Details',
