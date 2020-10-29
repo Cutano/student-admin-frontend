@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Card, Typography, Avatar, colors } from '@material-ui/core';
-import FolderOpenIcon from '@material-ui/icons/FolderOpenOutlined';
+import { Card, Typography, Avatar } from '@material-ui/core';
+import GroupIcon from '@material-ui/icons/Group';
 
-import { Label } from 'components';
 import gradients from 'utils/gradients';
 
 const useStyles = makeStyles(theme => ({
@@ -31,14 +30,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const StudentCount = props => {
-  const { className, ...rest } = props;
+  const { className, students, ...rest } = props;
+  const [studentCount, setStudentCount] = React.useState(0);
+
+  useEffect(() => {
+    if (students.length === 0) return;
+    setStudentCount(students.length);
+  }, [students]);
 
   const classes = useStyles();
-
-  const data = {
-    value: '12',
-    difference: '-10%'
-  };
 
   return (
     <Card
@@ -54,25 +54,19 @@ const StudentCount = props => {
           学生人数
         </Typography>
         <div className={classes.details}>
-          <Typography variant="h3">{data.value}</Typography>
-          <Label
-            className={classes.label}
-            color={colors.red[600]}
-            variant="outlined"
-          >
-            {data.difference}
-          </Label>
+          <Typography variant="h3">{studentCount}</Typography>
         </div>
       </div>
       <Avatar className={classes.avatar}>
-        <FolderOpenIcon />
+        <GroupIcon />
       </Avatar>
     </Card>
   );
 };
 
 StudentCount.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  students: PropTypes.array.isRequired
 };
 
 export default StudentCount;
