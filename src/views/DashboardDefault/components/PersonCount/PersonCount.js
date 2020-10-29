@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, Typography, Avatar } from '@material-ui/core';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,14 +28,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PersonCount = props => {
-  const { className, ...rest } = props;
+  const { className, teachers, students, ...rest } = props;
+  const [personCount, setPersonCount] = React.useState(0);
+
+  useEffect(() => {
+    if (students.length === 0 || teachers.length === 0) return;
+    setPersonCount(students.length + teachers.length);
+  }, [students, teachers]);
 
   const classes = useStyles();
-
-  const data = {
-    value: '25.50',
-    currency: '$'
-  };
 
   return (
     <Card
@@ -56,8 +57,7 @@ const PersonCount = props => {
             color="inherit"
             variant="h3"
           >
-            {data.currency}
-            {data.value}
+            {personCount}
           </Typography>
         </div>
       </div>
@@ -65,14 +65,16 @@ const PersonCount = props => {
         className={classes.avatar}
         color="inherit"
       >
-        <AttachMoneyIcon />
+        <GroupIcon />
       </Avatar>
     </Card>
   );
 };
 
 PersonCount.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  students: PropTypes.array.isRequired,
+  teachers: PropTypes.array.isRequired
 };
 
 export default PersonCount;

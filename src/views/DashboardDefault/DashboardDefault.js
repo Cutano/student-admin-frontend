@@ -107,7 +107,7 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <PersonCount courses={courses} students={students}/>
+          <PersonCount teachers={teachers} students={students}/>
         </Grid>
         <Grid
           item
