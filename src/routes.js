@@ -120,6 +120,11 @@ const routes = [
         component: lazy(() => import('views/TeacherManagementList'))
       },
       {
+        path: '/management/courses',
+        exact: true,
+        component: lazy(() => import('views/CourseManagementList'))
+      },
+      {
         path: '/management/customers/:id',
         exact: true,
         component: lazy(() => import('views/CustomerManagementDetails'))

@@ -60,6 +60,10 @@ export default [
             href: '/management/teachers'
           },
           {
+            title: '选课信息管理',
+            href: '/management/courses'
+          },
+          {
             title: 'Customer Details',
             href: '/management/customers/1/summary'
           },
