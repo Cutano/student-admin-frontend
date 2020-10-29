@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -34,13 +34,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PassRate = props => {
-  const { className, ...rest } = props;
+  const { className, courses, ...rest } = props;
+  const [rate, setRate] = React.useState(0);
+
+  useEffect(() => {
+    let sum = 0;
+    let cnt = 0;
+    for (const course of courses) {
+      if (course['grade'] >= 60) sum++;
+      cnt++;
+    }
+    if (cnt === 0) return;
+    setRate((sum * 100 / cnt).toFixed(2));
+  }, [courses]);
 
   const classes = useStyles();
 
-  const data = {
-    value: 97
-  };
 
   return (
     <Card
@@ -53,13 +62,13 @@ const PassRate = props => {
           gutterBottom
           variant="overline"
         >
-          学生及格率
+          课程及格率
         </Typography>
         <div className={classes.details}>
-          <Typography variant="h3">{data.value}%</Typography>
+          <Typography variant="h3">{rate}%</Typography>
           <LinearProgress
             className={classes.progress}
-            value={data.value}
+            value={rate}
             variant="determinate"
           />
         </div>
@@ -72,7 +81,8 @@ const PassRate = props => {
 };
 
 PassRate.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  courses: PropTypes.array.isRequired
 };
 
 export default PassRate;
