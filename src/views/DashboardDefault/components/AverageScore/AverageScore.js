@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Card, Typography, Avatar, colors } from '@material-ui/core';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import { Card, Typography, Avatar } from '@material-ui/core';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 
-import { Label } from 'components';
 import gradients from 'utils/gradients';
 
 const useStyles = makeStyles(theme => ({
@@ -31,15 +30,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AverageScore = props => {
-  const { className, ...rest } = props;
+  const { className, courses, ...rest } = props;
+  const [score, setScore] = React.useState(0);
 
   const classes = useStyles();
 
-  const data = {
-    value: '24,000',
-    currency: '$',
-    difference: '+4.5%'
-  };
+  useEffect(() => {
+    let sum = 0;
+    let cnt = 0;
+    for (const course of courses) {
+      sum += course['grade'];
+      cnt++;
+    }
+    if (cnt === 0) return;
+    setScore((sum / cnt).toFixed(2));
+  }, [courses]);
 
   return (
     <Card
@@ -56,27 +61,20 @@ const AverageScore = props => {
         </Typography>
         <div className={classes.details}>
           <Typography variant="h3">
-            {data.currency}
-            {data.value}
+            {score}
           </Typography>
-          <Label
-            className={classes.label}
-            color={colors.green[600]}
-            variant="outlined"
-          >
-            {data.difference}
-          </Label>
         </div>
       </div>
       <Avatar className={classes.avatar}>
-        <AttachMoneyIcon />
+        <LocalLibraryIcon />
       </Avatar>
     </Card>
   );
 };
 
 AverageScore.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  courses: PropTypes.array.isRequired
 };
 
 export default AverageScore;

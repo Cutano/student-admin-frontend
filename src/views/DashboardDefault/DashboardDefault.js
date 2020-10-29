@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
@@ -14,6 +14,7 @@ import {
   PassRate,
   PerformanceOverTime
 } from './components';
+import axios from '../../utils/axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +27,44 @@ const useStyles = makeStyles(theme => ({
 
 const DashboardDefault = () => {
   const classes = useStyles();
+
+  const [courses, setCourses] = React.useState([]);
+  const [students, setStudents] = React.useState([]);
+  const [teachers, setTeachers] = React.useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchCourses = () => {
+      axios.get('http://rinne.top:16384/course/list').then(response => {
+        if (mounted) {
+          setCourses(response.data);
+        }
+      });
+    };
+    const fetchStudents = () => {
+      axios.get('http://rinne.top:16384/student/list').then(response => {
+        if (mounted) {
+          setStudents(response.data);
+        }
+      });
+    };
+    const fetchTeachers = () => {
+      axios.get('http://rinne.top:16384/teacher/list').then(response => {
+        if (mounted) {
+          setTeachers(response.data);
+        }
+      });
+    };
+
+    fetchCourses();
+    fetchStudents();
+    fetchTeachers();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <Page
@@ -44,7 +83,7 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <AverageScore />
+          <AverageScore courses={courses}/>
         </Grid>
         <Grid
           item
@@ -52,7 +91,7 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <StudentCount />
+          <StudentCount students={students}/>
         </Grid>
         <Grid
           item
@@ -60,7 +99,7 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <PassRate />
+          <PassRate courses={courses}/>
         </Grid>
         <Grid
           item
@@ -68,7 +107,7 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <PersonCount />
+          <PersonCount courses={courses} students={students}/>
         </Grid>
         <Grid
           item
