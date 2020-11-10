@@ -15,6 +15,7 @@ import {
   PerformanceOverTime
 } from './components';
 import axios from '../../utils/axios';
+import EarningsSegmentation from './components/EarningsSegmentation';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -107,7 +108,10 @@ const DashboardDefault = () => {
           sm={6}
           xs={12}
         >
-          <PersonCount teachers={teachers} students={students}/>
+          <PersonCount
+            students={students}
+            teachers={teachers}
+          />
         </Grid>
         <Grid
           item
@@ -129,7 +133,7 @@ const DashboardDefault = () => {
           xl={4}
           xs={12}
         >
-          <TeamTasks />
+          <EarningsSegmentation students={students}/>
         </Grid>
         <Grid
           item
