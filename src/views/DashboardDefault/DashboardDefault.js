@@ -141,7 +141,6 @@ const DashboardDefault = () => {
           xl={8}
           xs={12}
         >
-          <LatestProjects />
         </Grid>
       </Grid>
     </Page>

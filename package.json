@@ -18,12 +18,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie > 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie > 9"
     ]
   },
   "dependencies": {
@@ -43,8 +45,10 @@
     "@material-ui/styles": "^4.2.0",
     "axios": "^0.19.0",
     "axios-mock-adapter": "^1.17.0",
+    "babel-polyfill": "^6.26.0",
     "chart.js": "^2.7.3",
     "clsx": "^1.0.4",
+    "core-js": "^3.7.0",
     "draft-js": "^0.11.0",
     "history": "^4.7.2",
     "immutable": "^4.0.0-rc.12",
@@ -55,6 +59,7 @@
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.1",
     "react": "^16.8.6",
+    "react-app-polyfill": "^2.0.0",
     "react-beautiful-dnd": "^11.0.4",
     "react-big-calendar": "^0.22.0",
     "react-chartjs-2": "^2.7.4",

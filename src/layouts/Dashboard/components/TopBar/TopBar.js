@@ -202,7 +202,7 @@ const TopBar = props => {
               className={classes.searchInput}
               disableUnderline
               onChange={handleSearchChange}
-              placeholder="Search people &amp; places"
+              placeholder="搜索"
               value={searchValue}
             />
           </div>
@@ -234,14 +234,6 @@ const TopBar = props => {
               </Paper>
             </ClickAwayListener>
           </Popper>
-          <Button
-            className={classes.trialButton}
-            onClick={handlePricingOpen}
-            variant="contained"
-          >
-            <LockIcon className={classes.trialIcon} />
-            Trial expired
-          </Button>
         </Hidden>
         <Hidden mdDown>
           <IconButton
@@ -264,7 +256,7 @@ const TopBar = props => {
             onClick={handleLogout}
           >
             <InputIcon className={classes.logoutIcon} />
-            Sign out
+            退出登录
           </Button>
         </Hidden>
         <Hidden lgUp>
